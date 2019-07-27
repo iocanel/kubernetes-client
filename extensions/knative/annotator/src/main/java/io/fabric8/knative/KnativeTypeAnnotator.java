@@ -65,8 +65,9 @@ public class KnativeTypeAnnotator extends Jackson2Annotator {
                     .param("prefix", "Doneable")
                     .param("value", "done");
 
-            buildable.paramArray("refs").annotate(BuildableReference.class)
-                .param("value", new JCodeModel()._class("io.fabric8.kubernetes.api.model.ObjectMeta"));
+            JAnnotationArrayMember buildableRes = buildable.paramArray("refs");
+            buildableRes.annotate(BuildableReference.class).param("value", new JCodeModel()._class("io.fabric8.kubernetes.api.model.ObjectMeta"));
+            buildableRes.annotate(BuildableReference.class).param("value", new JCodeModel()._class("io.fabric8.kubernetes.api.model.Container"));
 
         } catch (JClassAlreadyExistsException e) {
             e.printStackTrace();
